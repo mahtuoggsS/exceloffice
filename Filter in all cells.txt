@@ -1,0 +1,17 @@
+Sub FilterOtherTabs()
+Dim ws As Worksheet
+Dim rng As Range
+Dim value As String
+Set rng = ActiveSheet.Range("C:C").Cells(ActiveCell.Row)
+value = rng.value
+
+'Loop through all sheets in the workbook
+For Each ws In ThisWorkbook.Sheets
+    'Skip the "Report" tab
+    If ws.Name <> "Report" And ws.Name <> "Share Price" And ws.Name <> "Exchange Rates" Then
+        'Filter the first column of the current sheet
+        ws.Range("C:C").AutoFilter field:=1, Criteria1:=value
+    End If
+Next ws
+
+End Sub
